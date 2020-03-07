@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JasonToups/werk-backend/issues"
   },
-  "homepage": "https://github.com/JasonToups/werk-backend#readme"
+  "homepage": "https://github.com/JasonToups/werk-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
