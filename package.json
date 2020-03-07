@@ -1,0 +1,19 @@
+{
+  "name": "werk-backend",
+  "version": "1.0.0",
+  "description": "follow and book drag queens",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonToups/werk-backend.git"
+  },
+  "author": "Jason Toups",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JasonToups/werk-backend/issues"
+  },
+  "homepage": "https://github.com/JasonToups/werk-backend#readme"
+}
