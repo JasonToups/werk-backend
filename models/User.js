@@ -47,7 +47,23 @@ const UserSchema = mongoose.Schema({
       type: Schema.Types.ObjectId,
       ref: "Post"
     }
-  ]
+  ],
+  gigAppearanceFee: {
+    type: Number,
+    required: false
+  },
+  gigPerformanceFee: {
+    type: Number,
+    required: false
+  },
+  gigFeeTotal: {
+    type: Number,
+    required: false
+  },
+  gigRequirementDescription: {
+    type: String,
+    required: false
+  }
 });
 
 UserSchema.set("toJSON", {
