@@ -5,6 +5,7 @@ const dbUrl = process.env.MONGO_URI;
 // Define Models
 const UserModel = require('./User');
 const GigModel = require('./Gig');
+const PostModel = require('./Post');
 
 mongoose
   .connect(dbUrl, {
@@ -21,4 +22,5 @@ mongoose
 module.exports = {
   User: UserModel,
   Gig: GigModel,
+  Post: PostModel
 };

@@ -25,6 +25,14 @@ const newGig = {
   approval: true
 }
 
+const newPost = {
+  user_submitted_from: "5e64130153bb7e6ed5429aaa",
+  name: "Oasis Lounge Tonight",
+  description: "Come out to my weekly at Oasis, you'll gag on this gig, Hinny.",
+  image: "https://res-2.cloudinary.com/dostuff-media/image/upload//c_fill,g_faces,f_auto,w_800/v1532471421/event-poster-9704379.jpg",
+  likes: 17
+}
+
 db.User.create(newUser, (err, savedUser) => {
   if (err) {
     return console.log(err);
@@ -37,4 +45,11 @@ db.Gig.create(newGig, (err, savedGig) => {
     return console.log(err);
   }
   console.log(`saved new gig: ${savedGig}`);
+});
+
+db.Post.create(newPost, (err, savedPost) => {
+  if (err) {
+    return console.log(err);
+  }
+  console.log(`saved new post: ${savedPost}`);
 });
