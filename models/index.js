@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 const dbUrl = process.env.MONGO_URI;
+
+// Define Models
 const UserModel = require('./User');
+const GigModel = require('./Gig');
 
 mongoose
   .connect(dbUrl, {
@@ -16,5 +19,6 @@ mongoose
 
 
 module.exports = {
-  User: UserModel
+  User: UserModel,
+  Gig: GigModel,
 };
