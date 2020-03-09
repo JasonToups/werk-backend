@@ -17,23 +17,22 @@ const register = (request, response) => {
     // Generating Salt
     bcrypt.genSalt(10, (error, salt) => {
       if (error) {
-        return response.error(500, 'Something went wrong.')
+        return response.error(500, 'Something went salty.')
       }
       // Hashing the User Password
       bcrypt.hash(request.body.password, salt, (error, hash) => {
         if (error) {
-          return response.error(500, 'Something went wrong.')
+          return response.error(500, 'Something went hashy.')
         }
 
         const newUser = {
           name: request.body.name,
           email: request.body.email,
           password: hash,
-          homeCity: request.body.homeCity
         }
         db.User.create(newUser, (error, createdUser) => {
           if (error) {
-            return response.error(500, 'Something went wrong.')
+            return response.error(500, 'Could not create.')
           }
           response.sendStatus(201);
         })
