@@ -1,5 +1,6 @@
 
 // -------- IMPORTS -------- //
+// External Modules
 const express = require('express');
 const bodyParser = require("body-parser");
 const session = require("express-session");
@@ -7,18 +8,25 @@ const MongoStore = require("connect-mongo")(session);
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 
-// Database & Variables
+// Instanced Modules
 const app = express();
 
-/* When Models are ready, import them */
-// const db = require("./models");
-
-/* Change to .env variable later	 */
+// Internal Modules
+const db = require('./models');
+const routes = require("./routes");
+const utils = require('./middleware/utils');
+const formatter = require('./middleware/formatter');
+require("dotenv").config();
 const PORT = process.env.PORT || 4000;
-/* When Routes are ready, import them */
-// const routes = require("./routes");
 
 // -------- MIDDLEWARE -------- //
+// formats request body
+app.use(bodyParser.json());
+// logger
+app.use(utils.logger);
+// response formatter
+app.use(formatter);
+
 const corsOptions = {
   origin: ["http://localhost:3000"],
   credentials: true,
@@ -27,8 +35,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(bodyParser.json());
-
+/* TODO Bring in Sessions when I'm ready to tackle Auth */
 /* Express Session Auth */
 // app.use(
 //   session({
@@ -42,6 +49,26 @@ app.use(bodyParser.json());
 //   })
 // );
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+// -------- API ROUTES -------- //
+
+/* Post API Routes */
+app.use("/api/v1/posts", routes.post);
+/* Gig API Routes */
+app.use("/api/v1/gigs", routes.gig);
+
+// 405 middleware
+app.use('/api/v1/*', utils.methodNotAllowed);
+
+// ---- 404 Route
+app.get('/*', utils.notFound);
+
+/* TODO Point this to the Users Route */
 app.get("/api/v1/users", (req, res) => {
   db.User.find({}, (err, foundUsers) => {
     if (err) {
@@ -51,42 +78,7 @@ app.get("/api/v1/users", (req, res) => {
   });
 });
 
-// Allow CORS: we'll use this today to reduce security so we can more easily test our code in the browser.
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
-const test = [
-  {
-    name: 'John Dough',
-    home: 'Springfield'
-  },
-  {
-    name: 'Tester Testington',
-    home: 'Testingtown'
-  },
-  {
-    name: 'Dolly Levi',
-    home: 'Yonkers'
-  }
-];
-
-app.get('/', (req, res) => res.send('Hello Dolly!'));
-app.get('/test', (req, res) => res.json(test));
-
-// $.ajax({
-//   method: 'GET',
-//   url: 'http://localhost:3000/api/test',
-//   success: handleSuccess,
-//   error: handleError
-// });
-
-// const handleSuccess = json => console.log(json);
-
-// const handleError = (xhr, status, errorThrown) => console.log('uh oh');
-
+// -------- START SERVER -------- //
 app.listen(PORT, () => {
   console.log(`Server is listening on http://localhost:${PORT}`);
 });
