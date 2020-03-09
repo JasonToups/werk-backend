@@ -35,19 +35,18 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-/* TODO Bring in Sessions when I'm ready to tackle Auth */
 /* Express Session Auth */
-// app.use(
-//   session({
-//     store: new MongoStore({ url: process.env.MONGO_URI }),
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       maxAge: 1000 * 60 * 60 * 3 // Expire in 3 hours
-//     }
-//   })
-// );
+app.use(
+  session({
+    store: new MongoStore({ url: process.env.MONGO_URI }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 3 // Expire in 3 hours
+    }
+  })
+);
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -57,9 +56,14 @@ app.use((req, res, next) => {
 
 // -------- API ROUTES -------- //
 
-/* Post API Routes */
+// Auth
+app.use('/api/v1/auth', routes.auth);
+// Users
+// TODO BUG - When I enable this route, the server crashes
+app.use('/api/v1/users', routes.user);
+// Posts
 app.use("/api/v1/posts", routes.post);
-/* Gig API Routes */
+// Gigs
 app.use("/api/v1/gigs", routes.gig);
 
 // 405 middleware
@@ -69,14 +73,14 @@ app.use('/api/v1/*', utils.methodNotAllowed);
 app.get('/*', utils.notFound);
 
 /* TODO Point this to the Users Route */
-app.get("/api/v1/users", (req, res) => {
-  db.User.find({}, (err, foundUsers) => {
-    if (err) {
-      return res.json({ err });
-    }
-    res.json({ foundUsers });
-  });
-});
+// app.get("/api/v1/users", (req, res) => {
+//   db.User.find({}, (err, foundUsers) => {
+//     if (err) {
+//       return res.json({ err });
+//     }
+//     res.json({ foundUsers });
+//   });
+// });
 
 // -------- START SERVER -------- //
 app.listen(PORT, () => {

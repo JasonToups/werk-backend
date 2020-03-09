@@ -1,5 +1,18 @@
 const db = require('../models');
 
+// TODO use .status utility to shorten this.
+
+// index
+const index = (request, response) => {
+  db.User.find({}, (error, allUsers) => {
+    if (error) {
+      return response.error(500, 'Something went wrong.');
+    }
+    response.success(200, allUsers);
+  });
+};
+
+// show
 const showUser = (request, response) => {
   db.User.findById(request.params.id, (error, foundUser) => {
     if (error) return response.status(500).json({ message: "Something went wrong", error: error });
@@ -12,6 +25,7 @@ const showUser = (request, response) => {
   });
 }
 
+// update
 const updateUser = (request, response) => {
   db.User.findByIdAndUpdate(request.params.id, request.body, { new: true }, (error, updatedUser) => {
     if (error) return response.status(500).json({ message: "Something went wrong", error: error });
@@ -25,6 +39,7 @@ const updateUser = (request, response) => {
 };
 
 module.exports = {
+  index,
   showUser,
   updateUser,
 }

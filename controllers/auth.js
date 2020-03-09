@@ -62,7 +62,8 @@ const verify = (request, response) => {
 
 /* Delete - Delete Session */
 const logout = (request, response) => {
-  if (!request.session.currentUser) return response.status(401).json({ messsage: 'Unauthorized' })
+  if (!request.session.currentUser)
+    return response.status(401).json({ messsage: 'Unauthorized' })
   request.session.destroy(error => {
     if (error) return response.status(500).json({ message: 'Something went wrong. Please try again' });
     response.sendStatus(200);
