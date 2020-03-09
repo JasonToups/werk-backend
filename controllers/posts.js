@@ -1,6 +1,5 @@
 /* ------ IMPORTS ------ */
 const db = require('../models');
-// import "../middleware/formatter";
 
 /* ------ CONTROLLERS ------ */
 
@@ -13,17 +12,9 @@ const test = (request, response) => {
 const index = (request, response) => {
   db.Post.find({}, (error, allPosts) => {
     if (error) {
-      // ALWAYS RETURN TO EXIT
       return response.error(500, 'Something went wrong.');
     }
-    //TODO Ask Dalton about how to use formatter.js to handle the responses.
-    // uses formatter.js function
-    // response.success(200, allPosts);
-    const resObj = {
-      data: allPosts,
-      requestedAt: new Date().toLocaleString()
-    };
-    return response.json({ resObj });
+    response.success(200, allPosts);
   });
 };
 
@@ -31,16 +22,9 @@ const index = (request, response) => {
 const create = ('/', (request, response) => {
   db.Post.create(request.body, (error, createdPost) => {
     if (error) {
-      return response
-        .status(500)
-        .json({ message: 'Something went wrong.', error: error });
+      return response.error(500, 'Something went wrong.');
     }
-    const responseObj = {
-      status: 200,
-      data: createdPost,
-      requestedAt: new Date().toLocaleString()
-    };
-    response.status(200).json(responseObj);
+    response.success(200, createdPost);
   });
 });
 
@@ -48,21 +32,14 @@ const create = ('/', (request, response) => {
 const get = ('/:id', (request, response) => {
   db.Post.findById(request.params.id, (error, foundPost) => {
     if (error) {
-      // ALWAYS RETURN TO EXIT
-      return response
-        .status(500)
-        .json({ message: 'Something went wrong.', error: error });
+      return response.error(500, 'Something went wrong.');
     }
-    const responseObj = {
-      status: 200,
-      data: foundPost,
-      requestedAt: new Date().toLocaleString()
-    };
-    response.status(200).json(responseObj);
+    response.success(200, foundPost);
   });
 });
 
 // Update
+// TODO BUG - Cannot Put in Insomnia.
 const put = ('/:id', (request, response) => {
   db.Post.findByIdAndUpdate(
     request.params.id,
@@ -83,21 +60,26 @@ const put = ('/:id', (request, response) => {
     }
   );
 });
+// const put = ('/:id', (request, response) => {
+//   db.Post.findByIdAndUpdate(
+//     request.params.id,
+//     request.body,
+//     { new: true },
+//     (error, updatedPost) => {
+//       if (error) {
+//         return response.error(500, 'Something went wrong.');
+//       }
+//       response.success(200, updatedPost);
+//     });
+// });
 
 // Delete
 const destroy = ('/:id', (request, response) => {
   db.Post.findByIdAndDelete(request.params.id, (error, deletedPost) => {
     if (error) {
-      return response
-        .status(500)
-        .json({ message: 'Something went wrong.', error: error });
+      return response.error(500, 'Something went wrong.');
     }
-    const responseObj = {
-      status: 200,
-      data: deletedPost,
-      requestedAt: new Date().toLocaleString()
-    };
-    response.status(200).json(responseObj);
+    response.success(200, deletedPost);
   });
 });
 

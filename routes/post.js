@@ -6,22 +6,22 @@ const controllers = require('../controllers')
 /* ------ ROUTES ------ */
 
 // test
-router.get('/:id/test', controllers.post.test)
+router.get('/test', controllers.post.test);
 
 // index
-router.get('/posts', controllers.post.index);
+router.get('/', controllers.post.index);
 
 // create
-router.post('/posts', controllers.post.create);
+router.post('/', controllers.post.create);
 
 // show 
-router.get('/posts/:id', controllers.post.get);
+router.get('/:id', controllers.post.get);
 
 // update
-router.put('posts/:id', controllers.post.put);
+router.put('/:id', controllers.post.put);
 
 // delete
-router.delete('posts/:id', controllers.post.destroy);
+router.delete('/:id', controllers.post.destroy);
 
 /* ------ EXPORT ------ */
 
