@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//TODO Add Gig Requirements either in-line or as a separate model
+//TODO Add Gig Requirements in Profile
 const UserSchema = mongoose.Schema({
   userType: {
     type: String,
