@@ -59,7 +59,6 @@ app.use((req, res, next) => {
 // Auth
 app.use('/api/v1/auth', routes.auth);
 // Users
-// TODO BUG - When I enable this route, the server crashes
 app.use('/api/v1/users', routes.user);
 // Posts
 app.use("/api/v1/posts", routes.post);
@@ -71,16 +70,6 @@ app.use('/api/v1/*', utils.methodNotAllowed);
 
 // ---- 404 Route
 app.get('/*', utils.notFound);
-
-/* TODO Point this to the Users Route */
-// app.get("/api/v1/users", (req, res) => {
-//   db.User.find({}, (err, foundUsers) => {
-//     if (err) {
-//       return res.json({ err });
-//     }
-//     res.json({ foundUsers });
-//   });
-// });
 
 // -------- START SERVER -------- //
 app.listen(PORT, () => {
