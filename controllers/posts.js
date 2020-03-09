@@ -1,6 +1,6 @@
 /* ------ IMPORTS ------ */
 const db = require('../models');
-
+// import "../middleware/formatter";
 
 /* ------ CONTROLLERS ------ */
 
@@ -11,19 +11,24 @@ const test = (request, response) => {
 
 // index
 const index = (request, response) => {
-  db.Post.find({}, (error, allPost) => {
+  db.Post.find({}, (error, allPosts) => {
     if (error) {
       // ALWAYS RETURN TO EXIT
       return response.error(500, 'Something went wrong.');
     }
     //TODO Ask Dalton about how to use formatter.js to handle the responses.
     // uses formatter.js function
-    response.success(200, allPost);
+    // response.success(200, allPosts);
+    const resObj = {
+      data: allPosts,
+      requestedAt: new Date().toLocaleString()
+    };
+    return response.json({ resObj });
   });
 };
 
 // create
-const post = ('/', (request, response) => {
+const create = ('/', (request, response) => {
   db.Post.create(request.body, (error, createdPost) => {
     if (error) {
       return response
@@ -99,7 +104,7 @@ const destroy = ('/:id', (request, response) => {
 module.exports = {
   test,
   index,
-  post,
+  create,
   get,
   put,
   destroy

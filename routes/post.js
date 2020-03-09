@@ -9,19 +9,19 @@ const controllers = require('../controllers')
 router.get('/:id/test', controllers.post.test)
 
 // index
-router.get('/', controllers.post.index);
+router.get('/posts', controllers.post.index);
 
 // create
-router.post('/', controllers.post.post);
+router.post('/posts', controllers.post.create);
 
 // show 
-router.get('/:id', controllers.post.get);
+router.get('/posts/:id', controllers.post.get);
 
 // update
-router.put('/:id', controllers.post.put);
+router.put('posts/:id', controllers.post.put);
 
 // delete
-router.delete('/:id', controllers.post.destroy);
+router.delete('posts/:id', controllers.post.destroy);
 
 /* ------ EXPORT ------ */
 
