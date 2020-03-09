@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const UserSchema = mongoose.Schema({
   userType: {
     type: String,
-    required: [true, "Are you a Queen or a Fan?"]
+    required: [true, "Are you a Queen or a Fan?"],
+    default: "Queen"
   },
   name: {
     type: String,
@@ -30,7 +31,7 @@ const UserSchema = mongoose.Schema({
   },
   homeCity: {
     type: String,
-    required: [true, "Home city is required"]
+    required: [false, "Home city is required"]
   },
   tips: {
     type: Number,

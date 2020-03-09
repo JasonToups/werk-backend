@@ -39,7 +39,6 @@ const get = ('/:id', (request, response) => {
 });
 
 // Update
-// TODO BUG - Cannot Put in Insomnia.
 const put = ('/:id', (request, response) => {
   db.Gig.findByIdAndUpdate(
     request.params.id,
@@ -61,18 +60,6 @@ const put = ('/:id', (request, response) => {
     }
   );
 });
-// const put = ('/:id', (request, response) => {
-//   db.Gig.findByIdAndUpdate(
-//     request.params.id,
-//     request.body,
-//     { new: true },
-//     (error, updatedGig) => {
-//       if (error) {
-//         return response.error(500, 'Something went wrong.');
-//       }
-//       response.success(200, updatedGig);
-//     });
-// });
 
 // Delete
 const destroy = ('/:id', (request, response) => {
