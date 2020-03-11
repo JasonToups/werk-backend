@@ -26,6 +26,7 @@ const register = (request, response) => {
         }
 
         const newUser = {
+          userType: request.body.userType,
           name: request.body.name,
           email: request.body.email,
           password: hash,
