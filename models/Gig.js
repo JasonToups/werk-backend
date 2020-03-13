@@ -19,6 +19,10 @@ const GigSchema = mongoose.Schema({
     type: String,
     required: [true, "Name is required."]
   },
+  description: {
+    type: String,
+    required: [true, "Description is required."]
+  },
   address: {
     type: String,
     required: [true, "Address is required"],

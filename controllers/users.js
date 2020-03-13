@@ -24,7 +24,7 @@ const showUser = (request, response) => {
 const updateUser = (request, response) => {
   db.User.findByIdAndUpdate(request.params.id, request.body, { new: true }, (error, updatedUser) => {
     if (error) {
-      return response.error(500, 'Something went wrong.');
+      return response.error(500, error);
     }
     response.success(200, updatedUser);
   });
