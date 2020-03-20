@@ -17,6 +17,9 @@ router.post('/', controllers.post.create);
 // show 
 router.get('/:id', controllers.post.get);
 
+// show user posts
+router.get('/user/:id', controllers.post.getUserPosts);
+
 // update
 router.put('/:id', controllers.post.put);
 

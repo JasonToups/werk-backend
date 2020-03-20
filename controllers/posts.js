@@ -28,7 +28,7 @@ const create = ('/', (request, response) => {
   });
 });
 
-// Show
+// Show Single Post
 const get = ('/:id', (request, response) => {
   db.Post.findById(request.params.id, (error, foundPost) => {
     if (error) {
@@ -38,8 +38,17 @@ const get = ('/:id', (request, response) => {
   });
 });
 
+// Show Posts by User
+const getUserPosts = ('/user/:id', (request, response) => {
+  db.Post.find({ user_submitted_from: request.params.id }, (error, foundPost) => {
+    if (error) {
+      return response.error(500, 'Something went wrong.');
+    }
+    response.success(200, foundPost);
+  });
+});
+
 // Update
-// TODO BUG - Cannot Put in Insomnia.
 const put = ('/:id', (request, response) => {
   db.Post.findByIdAndUpdate(
     request.params.id,
@@ -88,6 +97,7 @@ module.exports = {
   index,
   create,
   get,
+  getUserPosts,
   put,
   destroy
 }
