@@ -67,5 +67,5 @@ app.get('/*', utils.notFound);
 
 // -------- START SERVER -------- //
 app.listen(PORT, () => {
-  console.log(`Server is listening on http://localhost:${PORT}`);
+  console.log(`Server is listening on Port ${PORT}`);
 });
