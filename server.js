@@ -28,7 +28,7 @@ app.use(utils.logger);
 app.use(formatter);
 
 const corsOptions = {
-  origin: ["https://werk.herokuapp.com/"],
+  origin: ["https://werk.herokuapp.com"],
   credentials: true,
   optionsSuccessStatus: 200
 };
