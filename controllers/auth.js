@@ -103,7 +103,10 @@ const logout = (request, response) => {
       .json({ messsage: 'Unauthorized' })
   request.session.destroy(error => {
     if (error) {
-      return response.error(500, 'Something went wrong.');
+      // Original
+      // return response.error(500, 'Something went wrong.');
+      // Debugging
+      return response.status(400).json({ err });
     }
     response.sendStatus(200);
   })
