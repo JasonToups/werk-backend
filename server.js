@@ -22,13 +22,14 @@ const PORT = process.env.PORT || 4000;
 // -------- MIDDLEWARE -------- //
 // formats request body
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // logger
 app.use(utils.logger);
 // response formatter
 app.use(formatter);
 
 const corsOptions = {
-  origin: ["https://werk.herokuapp.com"],
+  origin: ["http://localhost:3000", "https://werk.herokuapp.com", "http://werk.herokuapp.com"],
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -38,7 +39,7 @@ app.use(cors(corsOptions));
 /* Express Session Auth */
 app.use(
   session({
-    store: new MongoStore({ url: process.env.MONGODB_URI }),
+    store: new MongoStore({ url: process.env.MONGO_DB_URI }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,

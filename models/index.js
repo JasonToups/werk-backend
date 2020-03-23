@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const dbUrl = process.env.MONGO_URI;
+const dbUrl = process.env.MONGO_DB_URI;
 
 // Define Models
 const UserModel = require('./User');
