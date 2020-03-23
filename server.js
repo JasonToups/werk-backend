@@ -39,7 +39,7 @@ app.use(cors(corsOptions));
 /* Express Session Auth */
 app.use(
   session({
-    store: new MongoStore({ url: process.env.MONGODB_URI }),
+    store: new MongoStore({ url: "mongodb://heroku_85cndqk2:amufep0c8lak1tiqe2ghuglk9k@ds011890.mlab.com:11890/heroku_85cndqk2" }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
