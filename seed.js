@@ -51,8 +51,8 @@ const newPost = [
   {
     user_submitted_from: "5e67dca0416f0e07fe823ca1",
     name: "Divine",
-    description: "I'm a thief and a shitkicker, and I'd like to be famous.",
-    image: "https://i.imgur.com/AEuERpp.jpg",
+    description: "All my life I wanted to look like Elizabeth Taylor. Now Elizabeth Taylor looks like me.",
+    image: "https://s31242.pcdn.co/wp-content/uploads/2019/06/Divine-2.jpg",
     likes: 497
   },
   {
@@ -100,7 +100,7 @@ const newPost = [
   {
     user_submitted_from: "5e67dde6416f0e07fe823ca8",
     name: "Alaska",
-    description: "Come out to my weekly at Oasis, you'll gag on this gig, Hinny.",
+    description: "Hiyeeeeeeeeeeee!",
     image: "https://i.imgur.com/vLYoyfO.jpg",
     likes: 72
   },
@@ -114,7 +114,7 @@ const newPost = [
   {
     user_submitted_from: "5e67de09416f0e07fe823ca9",
     name: "Sasha Velour",
-    description: "Come out to my weekly at Oasis, you'll gag on this gig, Hinny.",
+    description: "Come see my avant garde art show, Nightgowns.",
     image: "https://i.imgur.com/UX4c4Oe.jpg",
     likes: 6
   },
