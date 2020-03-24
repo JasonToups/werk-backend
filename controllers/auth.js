@@ -100,7 +100,11 @@ const logout = (request, response) => {
   if (!request.session.currentUser)
     return response
       .status(401)
-      .json({ messsage: 'Unauthorized' })
+      .json({
+        messsage: 'Unauthorized'
+      })
+      .json({ request })
+      .json({ reponse })
   request.session.destroy(error => {
     if (error) {
       // Original
