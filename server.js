@@ -1,22 +1,21 @@
-
 // -------- IMPORTS -------- //
 // External Modules
 const express = require('express');
-const bodyParser = require("body-parser");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const cors = require("cors");
-const bcrypt = require("bcryptjs");
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const cors = require('cors');
+const bcrypt = require('bcryptjs');
 
 // Instanced Modules
 const app = express();
 
 // Internal Modules
 const db = require('./models');
-const routes = require("./routes");
+const routes = require('./routes');
 const utils = require('./middleware/utils');
 const formatter = require('./middleware/formatter');
-require("dotenv").config();
+require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 
 // -------- MIDDLEWARE -------- //
@@ -29,24 +28,30 @@ app.use(utils.logger);
 app.use(formatter);
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://werk.herokuapp.com", "http://werk.herokuapp.com"],
-  credentials: true,
-  optionsSuccessStatus: 200
+	origin: [
+		'http://localhost:3000',
+		'https://werk.herokuapp.com',
+		'http://werk.herokuapp.com',
+		'https://https://jasontoups.github.io/werk/',
+		'https://http://jasontoups.github.io/werk/',
+	],
+	credentials: true,
+	optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
 
 /* Express Session Auth */
 app.use(
-  session({
-    store: new MongoStore({ url: process.env.MONGODB_URI }),
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 3 // Expire in 3 hours
-    }
-  })
+	session({
+		store: new MongoStore({ url: process.env.MONGODB_URI }),
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: false,
+		cookie: {
+			maxAge: 1000 * 60 * 60 * 3, // Expire in 3 hours
+		},
+	}),
 );
 
 // -------- API ROUTES -------- //
@@ -56,9 +61,9 @@ app.use('/api/v1/auth', routes.auth);
 // Users
 app.use('/api/v1/users', routes.user);
 // Posts
-app.use("/api/v1/posts", routes.post);
+app.use('/api/v1/posts', routes.post);
 // Gigs
-app.use("/api/v1/gigs", routes.gig);
+app.use('/api/v1/gigs', routes.gig);
 
 // 405 middleware
 app.use('/api/v1/*', utils.methodNotAllowed);
@@ -68,5 +73,5 @@ app.get('/*', utils.notFound);
 
 // -------- START SERVER -------- //
 app.listen(PORT, () => {
-  console.log(`Server is listening on Port ${PORT}`);
+	console.log(`Server is listening on Port ${PORT}`);
 });
