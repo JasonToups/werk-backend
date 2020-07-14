@@ -1,6 +1,7 @@
 module.exports = {
-  auth: require("./auth"),
-  user: require("./users"),
-  post: require("./posts"),
-  gig: require("./gigs"),
+	auth: require('./auth'),
+	awsPresigner: require('./awsPresigner'),
+	gig: require('./gigs'),
+	post: require('./posts'),
+	user: require('./users'),
 };
