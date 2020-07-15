@@ -33,7 +33,7 @@ const corsOptions = {
 		'https://werk.herokuapp.com',
 		'http://werk.herokuapp.com',
 		'https://jasontoups.github.io',
-		'https://jasontoups.github.io',
+		'http://jasontoups.github.io',
 	],
 	credentials: true,
 	optionsSuccessStatus: 200,
