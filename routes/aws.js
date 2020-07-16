@@ -9,7 +9,7 @@ const controllers = require('../controllers');
 router.get('/', controllers.awsPresigner.generateGetUrl);
 
 // update
-router.put('/:id', controllers.awsPresigner.generateGetUrl);
+router.put('/:id', controllers.awsPresigner.generatePutUrl);
 
 /* ------ EXPORT ------ */
 
