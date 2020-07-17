@@ -61,6 +61,7 @@ const {
 	generatePutUrl,
 } = require('./controllers/awsPresigner');
 
+//TODO Move this section to controllers
 // GET URL
 app.get('/api/v1/aws/generate-get-url', (req, res) => {
 	// Both Key and ContentType are defined in the client side.
