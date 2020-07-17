@@ -30,6 +30,7 @@ app.use(formatter);
 const corsOptions = {
 	origin: [
 		'http://localhost:3000',
+		'http://localhost:4000',
 		'https://werk.herokuapp.com',
 		'http://werk.herokuapp.com',
 		'https://jasontoups.github.io',
@@ -61,7 +62,7 @@ const {
 } = require('./controllers/awsPresigner');
 
 // GET URL
-app.get('/werk/generate-get-url', (req, res) => {
+app.get('/api/v1/aws/generate-get-url', (req, res) => {
 	// Both Key and ContentType are defined in the client side.
 	// Key refers to the remote name of the file.
 	const { Key } = req.query;
@@ -75,7 +76,7 @@ app.get('/werk/generate-get-url', (req, res) => {
 });
 
 // PUT URL
-app.get('/werk/generate-put-url', (req, res) => {
+app.get('/api/v1/aws/generate-put-url', (req, res) => {
 	// Both Key and ContentType are defined in the client side.
 	// Key refers to the remote name of the file.
 	// ContentType refers to the MIME content type, in this case image/jpeg
@@ -100,7 +101,7 @@ app.use('/api/v1/posts', routes.post);
 // Gigs
 app.use('/api/v1/gigs', routes.gig);
 // AWS
-app.use('/api/v1/aws', routes.aws);
+// app.use('/api/v1/aws', routes.aws);
 
 // 405 middleware
 app.use('/api/v1/*', utils.methodNotAllowed);

@@ -6,10 +6,10 @@ const controllers = require('../controllers');
 /* ------ ROUTES ------ */
 
 // index
-router.get('/', controllers.awsPresigner.generateGetUrl);
+router.get('/generate-get-url', controllers.awsPresigner.generateGetUrl);
 
 // update
-router.put('/:id', controllers.awsPresigner.generatePutUrl);
+router.get('/generate-put-url', controllers.awsPresigner.generatePutUrl);
 
 /* ------ EXPORT ------ */
 
