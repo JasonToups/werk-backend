@@ -55,42 +55,6 @@ app.use(
 	}),
 );
 
-/* AWS Presigner */
-const {
-	generateGetUrl,
-	generatePutUrl,
-} = require('./controllers/awsPresigner');
-
-//TODO Move this section to controllers
-// GET URL
-app.get('/api/v1/aws/generate-get-url', (req, res) => {
-	// Both Key and ContentType are defined in the client side.
-	// Key refers to the remote name of the file.
-	const { Key } = req.query;
-	generateGetUrl(Key)
-		.then(getURL => {
-			res.send(getURL);
-		})
-		.catch(err => {
-			res.send(err);
-		});
-});
-
-// PUT URL
-app.get('/api/v1/aws/generate-put-url', (req, res) => {
-	// Both Key and ContentType are defined in the client side.
-	// Key refers to the remote name of the file.
-	// ContentType refers to the MIME content type, in this case image/jpeg
-	const { Key, ContentType } = req.query;
-	generatePutUrl(Key, ContentType)
-		.then(putURL => {
-			res.send({ putURL });
-		})
-		.catch(err => {
-			res.send(err);
-		});
-});
-
 // -------- API ROUTES -------- //
 
 // Auth
@@ -102,7 +66,7 @@ app.use('/api/v1/posts', routes.post);
 // Gigs
 app.use('/api/v1/gigs', routes.gig);
 // AWS
-// app.use('/api/v1/aws', routes.aws);
+app.use('/api/v1/aws', routes.aws);
 
 // 405 middleware
 app.use('/api/v1/*', utils.methodNotAllowed);

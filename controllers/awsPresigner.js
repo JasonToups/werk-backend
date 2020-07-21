@@ -14,7 +14,7 @@ const s3 = new AWS.S3();
 // Retrieving the bucket name from env variable
 const Bucket = process.env.BUCKET_NAME;
 
-// In order to create pre-signed GET adn PUT URLs we use the AWS SDK s3.getSignedUrl method.
+// In order to create pre-signed GET and PUT URLs we use the AWS SDK s3.getSignedUrl method.
 // getSignedUrl(operation, params, callback) ⇒ String
 // For more information check the AWS documentation: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
 
@@ -54,8 +54,39 @@ function generatePutUrl(Key, ContentType) {
 	});
 }
 
+const requestSignedUrl =
+	('/',
+	(req, res) => {
+		// Both Key and ContentType are defined in the client side.
+		// Key refers to the remote name of the file.
+		// ContentType refers to the MIME content type, in this case image/jpeg
+		const { Key, ContentType } = req.query;
+		generatePutUrl(Key, ContentType)
+			.then(putURL => {
+				res.send({ putURL });
+			})
+			.catch(err => {
+				res.send(err);
+			});
+	});
+
+const requestImage =
+	('/',
+	(req, res) => {
+		// Both Key and ContentType are defined in the client side.
+		// Key refers to the remote name of the file.
+		const { Key } = req.query;
+		generateGetUrl(Key)
+			.then(getURL => {
+				res.send(getURL);
+			})
+			.catch(err => {
+				res.send(err);
+			});
+	});
+
 // Finally, we export the methods so we can use it in our main application.
 module.exports = {
-	generateGetUrl,
-	generatePutUrl,
+	requestSignedUrl,
+	requestImage,
 };
